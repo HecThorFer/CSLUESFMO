@@ -33,7 +33,8 @@
 ///Realizamos un commit para hacer validos los cambios
     git commit -m "primer commit :')"
 //////////////////////////////////////////////////////
-///Especificamos la direccion de nuestro GitHub
+///Especificamos la direccion de nuestro GitHub 
+///solo lo hacemos la primera vez
     git remote add origin https://github.com/HecThorFer/CSLUESFMO.git
 //////////////////////////////////////////////////////
 ///Especificamos en que branch se realizaran los cambios
