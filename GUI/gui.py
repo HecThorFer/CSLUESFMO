@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'RegistroIngenieria&Arquitectura (RI&A).ui'
 #
-# Created: Fri Sep 21 22:39:49 2012
+# Created: Fri Sep 21 22:52:26 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -19,7 +19,7 @@ class Ui_Form(object):
         Form.setObjectName(_fromUtf8("Form"))
         Form.resize(660, 480)
         self.tabWidget = QtGui.QTabWidget(Form)
-        self.tabWidget.setGeometry(QtCore.QRect(10, 10, 641, 461))
+        self.tabWidget.setGeometry(QtCore.QRect(10, 10, 641, 451))
         self.tabWidget.setObjectName(_fromUtf8("tabWidget"))
         self.tab = QtGui.QWidget()
         self.tab.setObjectName(_fromUtf8("tab"))
@@ -119,23 +119,20 @@ class Ui_Form(object):
         self.tab_3 = QtGui.QWidget()
         self.tab_3.setObjectName(_fromUtf8("tab_3"))
         self.pushButton_3 = QtGui.QPushButton(self.tab_3)
-        self.pushButton_3.setGeometry(QtCore.QRect(260, 180, 95, 31))
+        self.pushButton_3.setGeometry(QtCore.QRect(330, 290, 95, 31))
         self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
+        self.label_7 = QtGui.QLabel(self.tab_3)
+        self.label_7.setGeometry(QtCore.QRect(160, 340, 67, 21))
+        self.label_7.setObjectName(_fromUtf8("label_7"))
+        self.label_8 = QtGui.QLabel(self.tab_3)
+        self.label_8.setGeometry(QtCore.QRect(270, 340, 231, 21))
+        self.label_8.setObjectName(_fromUtf8("label_8"))
         self.label_9 = QtGui.QLabel(self.tab_3)
         self.label_9.setGeometry(QtCore.QRect(250, 90, 121, 41))
         self.label_9.setObjectName(_fromUtf8("label_9"))
-        self.widget6 = QtGui.QWidget(self.tab_3)
-        self.widget6.setGeometry(QtCore.QRect(160, 270, 311, 23))
-        self.widget6.setObjectName(_fromUtf8("widget6"))
-        self.horizontalLayout_7 = QtGui.QHBoxLayout(self.widget6)
-        self.horizontalLayout_7.setMargin(0)
-        self.horizontalLayout_7.setObjectName(_fromUtf8("horizontalLayout_7"))
-        self.label_7 = QtGui.QLabel(self.widget6)
-        self.label_7.setObjectName(_fromUtf8("label_7"))
-        self.horizontalLayout_7.addWidget(self.label_7)
-        self.label_8 = QtGui.QLabel(self.widget6)
-        self.label_8.setObjectName(_fromUtf8("label_8"))
-        self.horizontalLayout_7.addWidget(self.label_8)
+        self.comboBox = QtGui.QComboBox(self.tab_3)
+        self.comboBox.setGeometry(QtCore.QRect(160, 290, 161, 31))
+        self.comboBox.setObjectName(_fromUtf8("comboBox"))
         self.tabWidget.addTab(self.tab_3, _fromUtf8(""))
 
         self.retranslateUi(Form)
@@ -168,9 +165,9 @@ class Ui_Form(object):
         self.label_12.setText(QtGui.QApplication.translate("Form", "Apellidos      ", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QtGui.QApplication.translate("Form", "Agregar Otros", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_3.setText(QtGui.QApplication.translate("Form", "Iniciar Rifa", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_9.setText(QtGui.QApplication.translate("Form", "Gif o algo para rifa", None, QtGui.QApplication.UnicodeUTF8))
         self.label_7.setText(QtGui.QApplication.translate("Form", "Ganador:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_8.setText(QtGui.QApplication.translate("Form", "@Nombre + @Apellido", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_9.setText(QtGui.QApplication.translate("Form", "Gif o algo para rifa", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QtGui.QApplication.translate("Form", "Rifa", None, QtGui.QApplication.UnicodeUTF8))
 
 
