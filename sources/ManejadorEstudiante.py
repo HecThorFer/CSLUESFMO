@@ -20,13 +20,18 @@ class ManejadorEstudiante:
 		self.__con.close()
 		return asistente
 
-	def Inscribir(self,id,nombres,apellidos,carrera):
-		if(not EstaInscrito(id)):
-			self.__asistencia.save({"_id":id,"nombres":nombres,"apellidos":apellidos,"carrera":carrera})
+	def Inscribir(self,id,nombre,carrera):
+		try:
+			if(not EstaInscrito(id)):
+				self.__asistencia.save({"_id":id,"nombre":nombre,"apellidos":apellidos,"carrera":carrera})
+				self.__con.close()
+				return 1
+			else:
+				return 0
+		except:
+			return 2
+		finally:
 			self.__con.close()
-			return True
-		else:
-			return False
 
 	def EstaInscrito(self,id):
 		if(self.__asistencia.find_one({"_id":id})==None):

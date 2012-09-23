@@ -13,7 +13,7 @@ class Conexion:
 	   	return self.__con.estudiantes
 	  
 	def Desconectar(self):
-	   	self.__con.disconnect()
+	   	self.__con.close()
 
 	def getHost(self):
 		return self.__host

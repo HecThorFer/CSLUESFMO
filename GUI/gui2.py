@@ -15,6 +15,15 @@ except AttributeError:
     _fromUtf8 = lambda s: s
 
 class Ui_Form(object):
+	
+    def Buscar(self):
+        result=self.manejador.Buscar_estudiante(str(self.le_due.text()))
+        self.lbl_nombre.setText(result["nombres"]+" "+result["apellidos"])
+        self.lbl_carrera.setText(result["carrear"])
+    def __miCod(self):
+	self.manejador=ManejadorEstudiante()
+	QtCore.QObject.connect(self.btn_buscar,QtCore.SIGNAL("clicked()"),self.Buscar)
+	
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
         Form.resize(660, 480)
@@ -487,7 +496,7 @@ class Ui_Form(object):
         self.btn_clear.setText(QtGui.QApplication.translate("Form", "Limpiar", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("Form", "Nombres", None, QtGui.QApplication.UnicodeUTF8))
         self.lbl_nombre.setText(QtGui.QApplication.translate("Form", "    @Nombres + @Apellidos", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_3.setText(QtGui.QApplication.translate("Form", "                       Carrera", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("Form", "Carrera", None, QtGui.QApplication.UnicodeUTF8))
         self.lbl_carrera.setText(QtGui.QApplication.translate("Form", "@Carrera               ", None, QtGui.QApplication.UnicodeUTF8))
         self.label_23.setText(QtGui.QApplication.translate("Form", "Asistencia:", None, QtGui.QApplication.UnicodeUTF8))
         self.chk_lun.setText(QtGui.QApplication.translate("Form", "Lunes", None, QtGui.QApplication.UnicodeUTF8))
