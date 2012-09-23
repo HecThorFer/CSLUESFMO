@@ -17,26 +17,39 @@ except AttributeError:
 class Ui_Form(object):
 	
     def Buscar(self):
-		result=self.manejador.Buscar_estudiante(str(self.le_due.text()))
-	        if result!=None:
-	 		self.lbl_nombre.setText(result["nombres"]+" "+result["apellidos"])
-       			self.lbl_carrera.setText(result["carrear"])
-		else:
-			QtGui.QMessageBox.information(self.toolBox, 'No Encontrado', "No se han encontrado coincidencias")
-    
+		result=self.manejador.Buscar(str(self.le_due.text()))
+		if result==None:
+			result=self.manejador.Buscar_estudiante(str(self.le_due.text()))
+		        if result!=None:
+		 		self.lbl_nombre.setText(result["nombres"]+" "+result["apellidos"])
+       				self.lbl_carrera.setText(result["carrear"])
+			else:
+				QtGui.QMessageBox.information(self.toolBox, 'No Encontrado', "No se han encontrado coincidencias")
+    		else:
+			self.lbl_nombre.setText(result["nombre"])
+                        self.lbl_carrera.setText(result["carrera"])
+
+
     def Inscribir(self):
+	if str(self.le_due.text())!="":
 		inscrito=self.manejador.Inscribir(str(self.le_due.text()),str(self.lbl_nombre.text()),str(self.lbl_carrera.text()))
+		print inscrito
 		if inscrito==1:
 			self.btn_clear.click()
 		elif inscrito==0:
 			 QtGui.QMessageBox.information(self.toolBox, 'Lo Siento', "Esta persona ya esta inscrita")
 		else:
 			 QtGui.QMessageBox.information(self.toolBox, 'Error', "Ha ocurrido un error")
-    
+        
+    def Asistencia(self):
+	if str(self.le_due.text())!="":
+		print "hola"		
     def __miCod(self):
 	self.manejador=ManejadorEstudiante()
 	QtCore.QObject.connect(self.btn_buscar,QtCore.SIGNAL("clicked()"),self.Buscar)
-	
+	QtCore.QObject.connect(self.btn_inscribir,QtCore.SIGNAL("clicked()"),self.Inscribir)	
+	QtCore.QObject.connect(self.btn_asist,QtCore.SIGNAL("clicked()"),self.Asistencia)
+
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
         Form.resize(660, 480)
