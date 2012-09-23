@@ -395,37 +395,47 @@
       <property name="title">
        <string>Opciones</string>
       </property>
-      <widget class="QPushButton" name="btn_inscribir_2">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
+      <widget class="QWidget" name="">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>50</y>
-         <width>95</width>
-         <height>31</height>
+         <x>20</x>
+         <y>30</y>
+         <width>87</width>
+         <height>107</height>
         </rect>
        </property>
-       <property name="text">
-        <string>Inscribir</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="btn_asist_2">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>100</y>
-         <width>95</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Asistencia</string>
-       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_12">
+        <item>
+         <widget class="QPushButton" name="btn_inscribir_2">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Inscribir</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_asist_2">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Asistencia</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_clear_2">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Limpiar</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
      <widget class="QWidget" name="">
@@ -643,37 +653,47 @@
       <property name="title">
        <string>Opciones</string>
       </property>
-      <widget class="QPushButton" name="btn_inscribir_3">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
+      <widget class="QWidget" name="">
        <property name="geometry">
         <rect>
          <x>10</x>
          <y>50</y>
-         <width>95</width>
-         <height>31</height>
+         <width>87</width>
+         <height>107</height>
         </rect>
        </property>
-       <property name="text">
-        <string>Inscribir</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="btn_asist_3">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>100</y>
-         <width>95</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Asistencia</string>
-       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_13">
+        <item>
+         <widget class="QPushButton" name="btn_inscribir_3">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Inscribir</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_asist_3">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Asistencia</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_clear_3">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Limpiar</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
      <widget class="QWidget" name="layoutWidget_7">
@@ -779,10 +799,10 @@
      <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
-        <x>80</x>
-        <y>30</y>
+        <x>60</x>
+        <y>10</y>
         <width>361</width>
-        <height>62</height>
+        <height>99</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -794,12 +814,19 @@
         </widget>
        </item>
        <item>
+        <widget class="QComboBox" name="cmb_carrera"/>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_9">
          <item>
-          <widget class="QComboBox" name="cmb_carrera"/>
+          <widget class="QPushButton" name="btn_rifa">
+           <property name="text">
+            <string>Iniciar Rifa</string>
+           </property>
+          </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="btn_rifa">
+          <widget class="QPushButton" name="btn_clear_4">
            <property name="text">
             <string>Iniciar Rifa</string>
            </property>
@@ -1045,7 +1072,6 @@
   <tabstop>chk_jue_3</tabstop>
   <tabstop>chk_vier_3</tabstop>
   <tabstop>btn_asist_3</tabstop>
-  <tabstop>cmb_carrera</tabstop>
   <tabstop>btn_rifa</tabstop>
   <tabstop>le_ip</tabstop>
   <tabstop>le_port</tabstop>
@@ -1196,6 +1222,182 @@
     <hint type="destinationlabel">
      <x>235</x>
      <y>125</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>lbl_carrera</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>504</x>
+     <y>209</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>210</x>
+     <y>247</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>lbl_nombre</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>567</x>
+     <y>202</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>252</x>
+     <y>200</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_clear_2</sender>
+   <signal>clicked()</signal>
+   <receiver>le_carnet</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>527</x>
+     <y>227</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>134</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_clear_2</sender>
+   <signal>clicked()</signal>
+   <receiver>le_nombre</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>571</x>
+     <y>228</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>312</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_clear_2</sender>
+   <signal>clicked()</signal>
+   <receiver>le_apellido</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>555</x>
+     <y>227</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>346</x>
+     <y>214</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_clear_2</sender>
+   <signal>clicked()</signal>
+   <receiver>cmb_carrera_2</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>509</x>
+     <y>233</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>418</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_clear_3</sender>
+   <signal>clicked()</signal>
+   <receiver>le_carnet_2</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>529</x>
+     <y>288</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>325</x>
+     <y>188</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_clear_3</sender>
+   <signal>clicked()</signal>
+   <receiver>le_nombre_2</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>505</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>407</x>
+     <y>225</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_clear_3</sender>
+   <signal>clicked()</signal>
+   <receiver>le_apellido_2</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>557</x>
+     <y>291</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>419</x>
+     <y>257</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_clear_4</sender>
+   <signal>clicked()</signal>
+   <receiver>lbl_ganador</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>386</x>
+     <y>275</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>262</x>
+     <y>330</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_clear_4</sender>
+   <signal>clicked()</signal>
+   <receiver>lbl_codigo</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>422</x>
+     <y>270</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>483</x>
+     <y>337</y>
     </hint>
    </hints>
   </connection>
