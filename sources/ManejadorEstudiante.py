@@ -22,8 +22,9 @@ class ManejadorEstudiante:
 
 	def Inscribir(self,id,nombre,carrera):
 		try:
-			if(not EstaInscrito(id)):
-				self.__asistencia.save({"_id":id,"nombre":nombre,"apellidos":apellidos,"carrera":carrera})
+			
+			if(not self.EstaInscrito(id)):
+				self.__asistencia.save({"_id":id,"nombre":nombre,"carrera":carrera})
 				self.__con.close()
 				return 1
 			else:
@@ -34,6 +35,7 @@ class ManejadorEstudiante:
 			self.__con.close()
 
 	def EstaInscrito(self,id):
+		print id
 		if(self.__asistencia.find_one({"_id":id})==None):
 			self.__con.close()
 			return False
