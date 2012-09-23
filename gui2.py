@@ -24,7 +24,7 @@ class Ui_Form(object):
 		else:
 			QtGui.QMessageBox.information(self.toolBox, 'No Encontrado', "No se han encontrado coincidencias")
     
-    def Inscribir(self)
+    def Inscribir(self):
 		inscrito=self.manejador.Inscribir(str(self.le_due.text()),str(self.lbl_nombre.text()),str(self.lbl_carrera.text()))
 		if inscrito==1:
 			self.btn_clear.click()
