@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'GUI/gui2.ui'
 #
-# Created: Sun Sep 23 14:39:25 2012
+# Created: Sun Sep 23 14:54:36 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -80,7 +80,7 @@ class Ui_Form(object):
         self.lbl_nombre.setObjectName(_fromUtf8("lbl_nombre"))
         self.verticalLayout_9.addWidget(self.lbl_nombre)
         self.widget2 = QtGui.QWidget(self.groupBox)
-        self.widget2.setGeometry(QtCore.QRect(30, 130, 164, 50))
+        self.widget2.setGeometry(QtCore.QRect(30, 130, 351, 50))
         self.widget2.setObjectName(_fromUtf8("widget2"))
         self.verticalLayout_10 = QtGui.QVBoxLayout(self.widget2)
         self.verticalLayout_10.setMargin(0)
@@ -425,7 +425,7 @@ class Ui_Form(object):
         self.toolBox.addItem(self.page_5, _fromUtf8(""))
 
         self.retranslateUi(Form)
-        self.toolBox.setCurrentIndex(3)
+        self.toolBox.setCurrentIndex(0)
         QtCore.QObject.connect(self.le_due, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.btn_buscar.click)
         QtCore.QObject.connect(self.le_carnet, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.le_nombre.setFocus)
         QtCore.QObject.connect(self.le_nombre, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.le_apellido.setFocus)
@@ -488,7 +488,7 @@ class Ui_Form(object):
         self.label_2.setText(QtGui.QApplication.translate("Form", "Nombres", None, QtGui.QApplication.UnicodeUTF8))
         self.lbl_nombre.setText(QtGui.QApplication.translate("Form", "    @Nombres + @Apellidos", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("Form", "                       Carrera", None, QtGui.QApplication.UnicodeUTF8))
-        self.lbl_carrera.setText(QtGui.QApplication.translate("Form", "@Carrera", None, QtGui.QApplication.UnicodeUTF8))
+        self.lbl_carrera.setText(QtGui.QApplication.translate("Form", "@Carrera               ", None, QtGui.QApplication.UnicodeUTF8))
         self.label_23.setText(QtGui.QApplication.translate("Form", "Asistencia:", None, QtGui.QApplication.UnicodeUTF8))
         self.chk_lun.setText(QtGui.QApplication.translate("Form", "Lunes", None, QtGui.QApplication.UnicodeUTF8))
         self.chk_mar.setText(QtGui.QApplication.translate("Form", "Martes", None, QtGui.QApplication.UnicodeUTF8))
