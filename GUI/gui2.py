@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'GUI/gui2.ui'
 #
-# Created: Sun Sep 23 00:58:17 2012
+# Created: Sun Sep 23 01:51:26 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -238,6 +238,7 @@ class Ui_Form(object):
         self.page_5.setObjectName(_fromUtf8("page_5"))
         self.groupBox_3 = QtGui.QGroupBox(self.page_5)
         self.groupBox_3.setGeometry(QtCore.QRect(50, 10, 521, 211))
+        self.groupBox_3.setInputMethodHints(QtCore.Qt.ImhNone)
         self.groupBox_3.setTitle(_fromUtf8(""))
         self.groupBox_3.setObjectName(_fromUtf8("groupBox_3"))
         self.layoutWidget_6 = QtGui.QWidget(self.groupBox_3)
@@ -292,12 +293,13 @@ class Ui_Form(object):
         self.label_5.setObjectName(_fromUtf8("label_5"))
         self.horizontalLayout_12.addWidget(self.label_5)
         self.le_port = QtGui.QLineEdit(self.widget3)
+        self.le_port.setInputMethodHints(QtCore.Qt.ImhFormattedNumbersOnly)
         self.le_port.setObjectName(_fromUtf8("le_port"))
         self.horizontalLayout_12.addWidget(self.le_port)
         self.toolBox.addItem(self.page_5, _fromUtf8(""))
 
         self.retranslateUi(Form)
-        self.toolBox.setCurrentIndex(4)
+        self.toolBox.setCurrentIndex(0)
         QtCore.QObject.connect(self.le_due, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.btn_buscar.click)
         QtCore.QObject.connect(self.le_carnet, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.le_nombre.setFocus)
         QtCore.QObject.connect(self.le_nombre, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.le_apellido.setFocus)
@@ -329,8 +331,9 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "Ingenieria Y Arquitectura", None, QtGui.QApplication.UnicodeUTF8))
-        self.btn_agregar.setText(QtGui.QApplication.translate("Form", "Agregar", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_agregar.setText(QtGui.QApplication.translate("Form", "Inscribir", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Form", "DUE:", None, QtGui.QApplication.UnicodeUTF8))
+        self.le_due.setInputMask(QtGui.QApplication.translate("Form", "AA99999; ", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_buscar.setText(QtGui.QApplication.translate("Form", "Buscar", None, QtGui.QApplication.UnicodeUTF8))
         self.lbl_nombre.setText(QtGui.QApplication.translate("Form", "@Nombres + @Apellidos", None, QtGui.QApplication.UnicodeUTF8))
         self.lbl_carrera.setText(QtGui.QApplication.translate("Form", "@Carrera", None, QtGui.QApplication.UnicodeUTF8))
@@ -338,7 +341,8 @@ class Ui_Form(object):
         self.label_3.setText(QtGui.QApplication.translate("Form", "Carrera", None, QtGui.QApplication.UnicodeUTF8))
         self.label_19.setText(QtGui.QApplication.translate("Form", "DUE del estudiante a buscar", None, QtGui.QApplication.UnicodeUTF8))
         self.toolBox.setItemText(self.toolBox.indexOf(self.page_3), QtGui.QApplication.translate("Form", "Inscribir Participantes", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_6.setText(QtGui.QApplication.translate("Form", "DUI ó Carnet", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_6.setText(QtGui.QApplication.translate("Form", "Código ó Carnet:", None, QtGui.QApplication.UnicodeUTF8))
+        self.le_carnet.setInputMask(QtGui.QApplication.translate("Form", "AA99999; ", None, QtGui.QApplication.UnicodeUTF8))
         self.label_9.setText(QtGui.QApplication.translate("Form", "Inscripción en caso que no tenga DUE el participante", None, QtGui.QApplication.UnicodeUTF8))
         self.label_21.setText(QtGui.QApplication.translate("Form", "Información del participante:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_14.setText(QtGui.QApplication.translate("Form", "Carrera:", None, QtGui.QApplication.UnicodeUTF8))
@@ -347,6 +351,7 @@ class Ui_Form(object):
         self.label_12.setText(QtGui.QApplication.translate("Form", "Apellidos      ", None, QtGui.QApplication.UnicodeUTF8))
         self.toolBox.setItemText(self.toolBox.indexOf(self.page), QtGui.QApplication.translate("Form", "Inscribir Otros", None, QtGui.QApplication.UnicodeUTF8))
         self.label_13.setText(QtGui.QApplication.translate("Form", "DUE ó Código", None, QtGui.QApplication.UnicodeUTF8))
+        self.le_codigo.setInputMask(QtGui.QApplication.translate("Form", "AA99999; ", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_buscar_2.setText(QtGui.QApplication.translate("Form", "Buscar", None, QtGui.QApplication.UnicodeUTF8))
         self.lbl_nombre_2.setText(QtGui.QApplication.translate("Form", "@Nombres + @Apellidos                 ", None, QtGui.QApplication.UnicodeUTF8))
         self.lbl_carrera_2.setText(QtGui.QApplication.translate("Form", "@Carrera", None, QtGui.QApplication.UnicodeUTF8))
@@ -372,8 +377,10 @@ class Ui_Form(object):
         self.label_22.setText(QtGui.QApplication.translate("Form", "Contraseña:", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_cambiar.setText(QtGui.QApplication.translate("Form", "Cambiar Configuración", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("Form", "Direccion IPv4:", None, QtGui.QApplication.UnicodeUTF8))
-        self.le_ip.setText(QtGui.QApplication.translate("Form", "127.0.0.1", None, QtGui.QApplication.UnicodeUTF8))
+        self.le_ip.setInputMask(QtGui.QApplication.translate("Form", "999.999.999.999; ", None, QtGui.QApplication.UnicodeUTF8))
+        self.le_ip.setText(QtGui.QApplication.translate("Form", "127.0.0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("Form", "Puerto:", None, QtGui.QApplication.UnicodeUTF8))
+        self.le_port.setInputMask(QtGui.QApplication.translate("Form", "99999; ", None, QtGui.QApplication.UnicodeUTF8))
         self.le_port.setText(QtGui.QApplication.translate("Form", "27017", None, QtGui.QApplication.UnicodeUTF8))
         self.toolBox.setItemText(self.toolBox.indexOf(self.page_5), QtGui.QApplication.translate("Form", "Configuración", None, QtGui.QApplication.UnicodeUTF8))
 
