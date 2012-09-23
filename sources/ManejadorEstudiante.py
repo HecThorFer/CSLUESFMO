@@ -54,5 +54,3 @@ class ManejadorEstudiante:
 		elif dia==4:
 			self.__asistencia.update({"_id":id},{"$set":{"dias.vie":True}})
 		self.__con.close()
-	
-
