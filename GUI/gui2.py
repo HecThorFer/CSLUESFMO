@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'GUI/gui2.ui'
 #
-# Created: Sat Sep 22 23:45:42 2012
+# Created: Sun Sep 23 00:00:56 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -19,7 +19,7 @@ class Ui_Form(object):
         Form.setObjectName(_fromUtf8("Form"))
         Form.resize(660, 480)
         self.toolBox = QtGui.QToolBox(Form)
-        self.toolBox.setGeometry(QtCore.QRect(10, 20, 621, 421))
+        self.toolBox.setGeometry(QtCore.QRect(20, 20, 621, 421))
         self.toolBox.setObjectName(_fromUtf8("toolBox"))
         self.page_3 = QtGui.QWidget()
         self.page_3.setObjectName(_fromUtf8("page_3"))
@@ -75,7 +75,7 @@ class Ui_Form(object):
         self.label_19.setObjectName(_fromUtf8("label_19"))
         self.toolBox.addItem(self.page_3, _fromUtf8(""))
         self.page = QtGui.QWidget()
-        self.page.setGeometry(QtCore.QRect(0, 0, 621, 281))
+        self.page.setGeometry(QtCore.QRect(0, 0, 621, 246))
         self.page.setObjectName(_fromUtf8("page"))
         self.groupBox_2 = QtGui.QGroupBox(self.page)
         self.groupBox_2.setGeometry(QtCore.QRect(30, 30, 571, 261))
@@ -210,7 +210,7 @@ class Ui_Form(object):
         self.horizontalLayout_10.addWidget(self.chk_vier)
         self.toolBox.addItem(self.page_4, _fromUtf8(""))
         self.page_2 = QtGui.QWidget()
-        self.page_2.setGeometry(QtCore.QRect(0, 0, 621, 281))
+        self.page_2.setGeometry(QtCore.QRect(0, 0, 621, 246))
         self.page_2.setObjectName(_fromUtf8("page_2"))
         self.cmb_carrera = QtGui.QComboBox(self.page_2)
         self.cmb_carrera.setGeometry(QtCore.QRect(140, 100, 161, 31))
@@ -234,14 +234,38 @@ class Ui_Form(object):
         self.lbl_codigo.setGeometry(QtCore.QRect(400, 220, 67, 21))
         self.lbl_codigo.setObjectName(_fromUtf8("lbl_codigo"))
         self.toolBox.addItem(self.page_2, _fromUtf8(""))
+        self.page_5 = QtGui.QWidget()
+        self.page_5.setObjectName(_fromUtf8("page_5"))
+        self.groupBox_3 = QtGui.QGroupBox(self.page_5)
+        self.groupBox_3.setGeometry(QtCore.QRect(50, 30, 521, 191))
+        self.groupBox_3.setTitle(_fromUtf8(""))
+        self.groupBox_3.setObjectName(_fromUtf8("groupBox_3"))
+        self.btn_cambiar = QtGui.QPushButton(self.groupBox_3)
+        self.btn_cambiar.setGeometry(QtCore.QRect(280, 90, 151, 31))
+        self.btn_cambiar.setObjectName(_fromUtf8("btn_cambiar"))
+        self.le_ip = QtGui.QLineEdit(self.groupBox_3)
+        self.le_ip.setGeometry(QtCore.QRect(130, 50, 113, 31))
+        self.le_ip.setObjectName(_fromUtf8("le_ip"))
+        self.label_4 = QtGui.QLabel(self.groupBox_3)
+        self.label_4.setGeometry(QtCore.QRect(26, 30, 111, 21))
+        self.label_4.setObjectName(_fromUtf8("label_4"))
+        self.le_port = QtGui.QLineEdit(self.groupBox_3)
+        self.le_port.setGeometry(QtCore.QRect(130, 130, 113, 31))
+        self.le_port.setObjectName(_fromUtf8("le_port"))
+        self.label_5 = QtGui.QLabel(self.groupBox_3)
+        self.label_5.setGeometry(QtCore.QRect(70, 110, 111, 21))
+        self.label_5.setObjectName(_fromUtf8("label_5"))
+        self.toolBox.addItem(self.page_5, _fromUtf8(""))
 
         self.retranslateUi(Form)
-        self.toolBox.setCurrentIndex(1)
+        self.toolBox.setCurrentIndex(4)
         QtCore.QObject.connect(self.le_due, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.btn_buscar.click)
         QtCore.QObject.connect(self.le_carnet, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.le_nombre.setFocus)
         QtCore.QObject.connect(self.le_nombre, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.le_apellido.setFocus)
         QtCore.QObject.connect(self.le_codigo, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.btn_buscar_2.click)
         QtCore.QObject.connect(self.le_apellido, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.cmb_carrera_2.setFocus)
+        QtCore.QObject.connect(self.le_ip, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.le_port.setFocus)
+        QtCore.QObject.connect(self.le_port, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.btn_cambiar.click)
         QtCore.QMetaObject.connectSlotsByName(Form)
         Form.setTabOrder(self.le_due, self.btn_buscar)
         Form.setTabOrder(self.btn_buscar, self.btn_agregar)
@@ -259,6 +283,9 @@ class Ui_Form(object):
         Form.setTabOrder(self.chk_jue, self.chk_vier)
         Form.setTabOrder(self.chk_vier, self.cmb_carrera)
         Form.setTabOrder(self.cmb_carrera, self.btn_rifa)
+        Form.setTabOrder(self.btn_rifa, self.le_ip)
+        Form.setTabOrder(self.le_ip, self.le_port)
+        Form.setTabOrder(self.le_port, self.btn_cambiar)
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "Ingenieria Y Arquitectura", None, QtGui.QApplication.UnicodeUTF8))
@@ -301,6 +328,12 @@ class Ui_Form(object):
         self.label_8.setText(QtGui.QApplication.translate("Form", "Código", None, QtGui.QApplication.UnicodeUTF8))
         self.lbl_codigo.setText(QtGui.QApplication.translate("Form", "@Codigo", None, QtGui.QApplication.UnicodeUTF8))
         self.toolBox.setItemText(self.toolBox.indexOf(self.page_2), QtGui.QApplication.translate("Form", "Rifa", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_cambiar.setText(QtGui.QApplication.translate("Form", "Cambiar Configuración", None, QtGui.QApplication.UnicodeUTF8))
+        self.le_ip.setText(QtGui.QApplication.translate("Form", "127.0.0.1", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("Form", "Direccion IPv4:", None, QtGui.QApplication.UnicodeUTF8))
+        self.le_port.setText(QtGui.QApplication.translate("Form", "27017", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_5.setText(QtGui.QApplication.translate("Form", "Puerto:", None, QtGui.QApplication.UnicodeUTF8))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_5), QtGui.QApplication.translate("Form", "Configuración", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":
