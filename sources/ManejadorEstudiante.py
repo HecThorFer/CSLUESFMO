@@ -1,19 +1,24 @@
 from pymongo import Connection
 from datetime import date
 
-class ManejadorEstudiante
+class ManejadorEstudiante:
 
 	def __init__(self):
 		self.__con=Connection()
 	        self.__estudiantes=self.__con.estudiantes.estudiantes2012
-		self.__asistencia=self.con.estudiantes.asistencia
+		self.__asistencia=self.__con.estudiantes.asistencia
 		self.__inicio=date(2012,9,24)
 		self.__fin=date(2012,9,28)
 
-	def Buscar(self,id):
-		estudiante=self.__asistencia.find_one({"_id":id})
+	def Buscar_estudiante(self,id):
+		estudiante=self.__estudiantes.find_one({"_id":id})
 		self.__con.close()
 		return estudiante
+
+	def Buscar(self,id):
+		asistente=self.__asistencia.find_one({"_id":id})
+		self.__con.close()
+		return asistente
 
 	def Inscribir(self,id,nombres,apellidos,carrera):
 		if(not EstaInscrito(id)):
@@ -35,12 +40,14 @@ class ManejadorEstudiante
 		dia=date.today().weekday()
 		if dia==0:
 			self.__asistencia.update({"_id":id},{"$set":{"dias.lun":True}})
-		elif dia==1
+		elif dia==1:
 			self.__asistencia.update({"_id":id},{"$set":{"dias.mar":True}})
-		elif dia==2
+		elif dia==2:
 			self.__asistencia.update({"_id":id},{"$set":{"dias.mie":True}})
-		elif dia==3
+		elif dia==3:
 			self.__asistencia.update({"_id":id},{"$set":{"dias.jue":True}})
-		elif dia==4
+		elif dia==4:
 			self.__asistencia.update({"_id":id},{"$set":{"dias.vie":True}})
 		self.__con.close()
+	
+
