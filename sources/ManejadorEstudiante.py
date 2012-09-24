@@ -11,8 +11,8 @@ class ManejadorEstudiante:
 		
 
 	def aesia(self,id):
-		aesia=self.__aesia.find({"_id":id})
-		if(aesia!=None):
+		aesia=self.__aesia.find({"_id":id}).count()
+		if(aesia!=0):
 			return True
 		else:
 			return False
@@ -67,3 +67,12 @@ class ManejadorEstudiante:
 		elif dia==4:
 			self.__asistencia.update({"_id":id},{"$set":{"dias.vie":True}})
 		self.__con.close()
+
+	def CrearCodigo(self):
+		a=self.__asistencia.find({"_id":{'$regex':'^EE69'}}).count()
+		if a<10:	
+			return "EE6900"+str(a)
+		elif a>=10 and a<100:
+			return "EE690"+str(a)
+		elif a>=100:
+			return "EE69"+str(a)
