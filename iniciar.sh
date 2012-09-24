@@ -1,3 +1,3 @@
 echo "iniciando interfaz"
-python gui2.py
+python CSLUESOCC.py
 
