@@ -11,8 +11,8 @@ class ManejadorEstudiante:
 		
 
 	def aesia(self,id):
-		aesia=self.__aesia.find({"_id":id})
-		if(aesia!=None):
+		aesia=self.__aesia.find({"_id":id}).count()
+		if(aesia!=0):
 			return True
 		else:
 			return False
@@ -60,7 +60,6 @@ class ManejadorEstudiante:
 
 	def MarcarAsistencia(self,id):
 		dia=date.today().weekday()
-		#dia=date(2012,9,26).weekday()
 			
 		if dia==0:
 			self.__asistencia.update({"_id":id},{"$set":{"dias.lun":True}})
@@ -73,3 +72,35 @@ class ManejadorEstudiante:
 		elif dia==4:
 			self.__asistencia.update({"_id":id},{"$set":{"dias.vie":True}})
 		self.__con.close()
+
+	def CrearCodigo(self):
+		a=self.__asistencia.find({"_id":{'$regex':'^EE69'}}).count()
+		if a<10:	
+			return "EE6900"+str(a)
+		elif a>=10 and a<100:
+			return "EE690"+str(a)
+		elif a>=100:
+			return "EE69"+str(a)
+	
+	def Exportar(self,nombre):
+		 dia=date.today().weekday()
+		#dia=date(2012,9,26).weekday()
+		estudiantes=[]
+                if dia==0:
+                       estudiantes= self.__asistencia.find({"dias.lun":True,"aesia":True})
+                elif dia==1:
+                       estudiantes=self.__asistencia.find({"dias.mar":True,"aesia":True})
+                elif dia==2:
+                       estudiantes=self.__asistencia.find({"dias.mie":True,"aesia":True})
+                elif dia==3:
+                       estudiantes=self.__asistencia.find({"dias.jue":True,"aesia":True})
+                elif dia==4:
+                        estudiantes=self.__asistencia.find({"dias.vie":True,"aesia":True})
+
+		archi=open(nombre+".txt","a")
+		for es in estudiantes:
+			a= es["_id"]+","+es["nombre"]+","+es["carrera"]+"\n"
+			print a
+			archi.write(a+"\n")
+		archi.close()
+		

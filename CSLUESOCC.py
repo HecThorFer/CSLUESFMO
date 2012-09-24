@@ -42,9 +42,13 @@ class Ui_Form(object):
 		else:
 			 QtGui.QMessageBox.information(self.toolBox, 'Error', "Ha ocurrido un error")
     
-    def Inscribir2(self):    
+    def Inscribir2(self): 
+	 
+	if str(self.cmb_carrera_2.currentText())=="NO ES ESTUDIANTE":
+		print self.manejador.CrearCodigo()
+		self.le_carnet.setText(self.manejador.CrearCodigo())   
 	if str(self.le_carnet.text())!="":
-		inscrito=self.manejador.Inscribir(str(self.le_carnet.text().upper()),str(self.le_nombre.text().toUtf8()) + str(" ") + str(self.le_apellido.text().toUtf8()),str(self.cmb_carrera_2.currentText()))
+		inscrito=self.manejador.Inscribir(str(self.le_carnet.text()).upper(),str(self.le_nombre.text().toUtf8()).upper() + str(" ") + str(self.le_apellido.text().toUtf8()).upper(),str(self.cmb_carrera_2.currentText()))
 		if inscrito==1:
 			self.btn_clear.click()
 		elif inscrito==0:
@@ -64,6 +68,7 @@ class Ui_Form(object):
                 	result=self.manejador.Buscar(str(self.le_due.text()).upper())
 			self.Marcar(result)
     
+
     def Rifa(self):
 	estudiantes=[]
 	estudiantes=self.manejador.Buscar_carrera(str(self.cmb_carrera.currentText()))
@@ -71,7 +76,9 @@ class Ui_Form(object):
 		QtGui.QMessageBox.information(self.toolBox, 'Error', "No hay participantes de dicha carrera")
 	else:
 		ganador=random.randint(0,estudiantes.count() - 1)
-		print estudiantes[ganador]
+		self.lbl_ganador.setText(estudiantes[ganador]["nombre"])
+		self.lbl_codigo.setText(estudiantes[ganador]["_id"])
+
                          
     def Marcar(self,objeto):
 	if objeto.has_key("dias"):
@@ -99,15 +106,21 @@ class Ui_Form(object):
 	QtCore.QObject.connect(self.btn_inscribir,QtCore.SIGNAL("clicked()"),self.Inscribir)	
 	QtCore.QObject.connect(self.btn_asist,QtCore.SIGNAL("clicked()"),self.Asistencia)
 	QtCore.QObject.connect(self.btn_clear, QtCore.SIGNAL(_fromUtf8("clicked()")),self.Desmarcar)
-		
+	QtCore.QObject.connect(self.btn_cambiar, QtCore.SIGNAL(_fromUtf8("clicked()")),self.Exportar)		
     def __btn_click(self):
 	        self.manejador=ManejadorEstudiante()
 	        QtCore.QObject.connect(self.btn_inscribir_2,QtCore.SIGNAL("clicked()"),self.Inscribir2)
 	
+
+    def __btn_click(self):
+	QtCore.QObject.connect(self.btn_inscribir_2,QtCore.SIGNAL("clicked()"),self.Inscribir)
 	
     def __btn_rifa_click(self):
 	    self.manejador=ManejadorEstudiante()
 	    QtCore.QObject.connect(self.btn_rifa,QtCore.SIGNAL("clicked()"),self.Rifa)
+	
+    def Exportar(self):
+	self.manejador.Exportar(str(self.lineEdit.text()))
 	
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
@@ -401,7 +414,7 @@ class Ui_Form(object):
         QtCore.QObject.connect(self.btn_clear_4, QtCore.SIGNAL(_fromUtf8("clicked()")), self.lbl_codigo.clear)
         QtCore.QObject.connect(self.btn_clear_4, QtCore.SIGNAL(_fromUtf8("clicked()")), self.lbl_ganador.clear)
         QtCore.QObject.connect(self.btn_clear, QtCore.SIGNAL(_fromUtf8("clicked()")), self.lbl_nombre.clear)
-        QtCore.QObject.connect(self.btn_clear_2, QtCore.SIGNAL(_fromUtf8("clicked()")), self.cmb_carrera_2.clear)
+#        QtCore.QObject.connect(self.btn_clear_2, QtCore.SIGNAL(_fromUtf8("clicked()")), self.cmb_carrera_2.clear)
         QtCore.QMetaObject.connectSlotsByName(Form)
         Form.setTabOrder(self.le_due, self.btn_buscar)
         Form.setTabOrder(self.btn_buscar, self.btn_inscribir)
