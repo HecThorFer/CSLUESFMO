@@ -69,9 +69,13 @@ class Ui_Form(object):
 			self.Marcar(result)
     
     def Rifa(self):    
-	estudiantes=self.manejador.Buscar_carrera(str(self.cmb_carrera.currentText()))
-        ganador=random.randint(0,estudiantes.count())
-        print estudiantes[ganador]
+       estudiantes=[]
+       estudiantes=self.manejador.Buscar_carrera(str(self.cmb_carrera.currentText()))
+       if len(estudiantes) <= 0:
+               QtGui.QMessageBox.information(self.toolBox, 'Error', "No hay participantes de dicha carrera")
+       else:
+               ganador=random.randint(0,len(estudiantes) - 1)
+       	       print estudiantes[ganador]
                          
     def Marcar(self,objeto):
 	if objeto.has_key("dias"):
