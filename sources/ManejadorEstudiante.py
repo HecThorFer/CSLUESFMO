@@ -29,12 +29,10 @@ class ManejadorEstudiante:
 		return asistente
     
         def Buscar_carrera(self,carrera):
-	       estudiantes=[]
-               estudiante=self.__asistencia.find({"carrera":carrera})
-	       for es in estudiante:
-		  estudiantes.append(es)
-               self.__con.close()
-               return estudiantes
+		estudiante=[]
+		estudiante=self.__asistencia.find({"carrera":carrera})
+		self.__con.close()
+		return estudiante
     
 	def Inscribir(self,id,nombre,carrera):
 		try:

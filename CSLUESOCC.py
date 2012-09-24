@@ -68,14 +68,17 @@ class Ui_Form(object):
                 	result=self.manejador.Buscar(str(self.le_due.text()).upper())
 			self.Marcar(result)
     
-    def Rifa(self):    
-       estudiantes=[]
-       estudiantes=self.manejador.Buscar_carrera(str(self.cmb_carrera.currentText()))
-       if len(estudiantes) <= 0:
-               QtGui.QMessageBox.information(self.toolBox, 'Error', "No hay participantes de dicha carrera")
-       else:
-               ganador=random.randint(0,len(estudiantes) - 1)
-       	       print estudiantes[ganador]
+
+    def Rifa(self):
+	estudiantes=[]
+	estudiantes=self.manejador.Buscar_carrera(str(self.cmb_carrera.currentText()))
+	if estudiantes.count() <= 0:
+		QtGui.QMessageBox.information(self.toolBox, 'Error', "No hay participantes de dicha carrera")
+	else:
+		ganador=random.randint(0,estudiantes.count() - 1)
+		self.lbl_ganador.setText(estudiantes[ganador]["nombre"])
+		self.lbl_codigo.setText(estudiantes[ganador]["_id"])
+
                          
     def Marcar(self,objeto):
 	if objeto.has_key("dias"):
@@ -468,7 +471,7 @@ class Ui_Form(object):
         self.cmb_carrera.setItemText(5, QtGui.QApplication.translate("Form", "INGENIERIA DE SISTEMAS INFORMATICOS", None, QtGui.QApplication.UnicodeUTF8))
         self.cmb_carrera.setItemText(6, QtGui.QApplication.translate("Form", "INGENIERIA ELECTRICA", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_rifa.setText(QtGui.QApplication.translate("Form", "Iniciar Rifa", None, QtGui.QApplication.UnicodeUTF8))
-        self.btn_clear_4.setText(QtGui.QApplication.translate("Form", "Iniciar Rifa", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_clear_4.setText(QtGui.QApplication.translate("Form", "Limpiar", None, QtGui.QApplication.UnicodeUTF8))
         self.label_7.setText(QtGui.QApplication.translate("Form", "Ganador:", None, QtGui.QApplication.UnicodeUTF8))
         self.lbl_ganador.setText(QtGui.QApplication.translate("Form", "@Nombre + @Apellido                                      ", None, QtGui.QApplication.UnicodeUTF8))
         self.label_8.setText(QtGui.QApplication.translate("Form", "DUE", None, QtGui.QApplication.UnicodeUTF8))
