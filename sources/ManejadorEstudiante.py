@@ -28,7 +28,8 @@ class ManejadorEstudiante:
 		self.__con.close()
 		return asistente
     
-    def Buscar_carrera(self,carrera):
+        def Buscar_carrera(self,carrera):
+		estudiante=[]
 		estudiante=self.__asistencia.find({"carrera":carrera})
 		self.__con.close()
 		return estudiante
