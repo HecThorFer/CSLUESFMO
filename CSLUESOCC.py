@@ -9,6 +9,7 @@
 
 from PyQt4 import QtCore, QtGui
 from sources.ManejadorEstudiante import ManejadorEstudiante
+import ramdom
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -62,7 +63,11 @@ class Ui_Form(object):
                         self.manejador.MarcarAsistencia(str(self.le_due.text()).upper())
                 	result=self.manejador.Buscar(str(self.le_due.text()).upper())
 			self.Marcar(result)
-
+    
+    def Rifa(self):    
+	    estudiantes=self.manejador.Buscar_carrera(str(self.cmb_carrera.currentText()))
+        ganador=random.randint(0,estudiantes.count())
+        print estudiantes[ganador]
                          
     def Marcar(self,objeto):
 	if objeto.has_key("dias"):
@@ -82,8 +87,7 @@ class Ui_Form(object):
                         self.chk_mar.setCheckState(False)
                         self.chk_mier.setCheckState(False)
                         self.chk_jue.setCheckState(False)
-                        self.chk_vier.setCheckState(False)
-
+                        self.chk_vier.setCheckState(False)        
 
     def __miCod(self):
 	self.manejador=ManejadorEstudiante()
@@ -91,10 +95,15 @@ class Ui_Form(object):
 	QtCore.QObject.connect(self.btn_inscribir,QtCore.SIGNAL("clicked()"),self.Inscribir)	
 	QtCore.QObject.connect(self.btn_asist,QtCore.SIGNAL("clicked()"),self.Asistencia)
 	QtCore.QObject.connect(self.btn_clear, QtCore.SIGNAL(_fromUtf8("clicked()")),self.Desmarcar)
+		
+    def __btn_click(self):
+	        self.manejador=ManejadorEstudiante()
+	        QtCore.QObject.connect(self.btn_inscribir_2,QtCore.SIGNAL("clicked()"),self.Inscribir2)
 	
-	def __btn_click(self):
-	self.manejador=ManejadorEstudiante()
-	QtCore.QObject.connect(self.btn_inscribir_2,QtCore.SIGNAL("clicked()"),self.Inscribir2)
+	
+	def __btn_rifa_click(self):
+	    self.manejador=ManejadorEstudiante()
+	    QtCore.QObject.connect(self.btn_rifa,QtCore.SIGNAL("clicked()"),self.Rifa)
 	
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
@@ -400,7 +409,8 @@ class Ui_Form(object):
         
         self.__miCod()
         self.__btn_click()
-        
+        self.__btn_rifa_click()
+                
     def retranslateUi(self, Form):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "Ingenieria Y Arquitectura", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Form", "DUE:", None, QtGui.QApplication.UnicodeUTF8))
