@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'GUI/gui2.ui'
 #
-# Created: Sun Sep 23 20:47:32 2012
+# Created: Sun Sep 23 21:19:22 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -16,7 +16,7 @@ except AttributeError:
     _fromUtf8 = lambda s: s
 
 class Ui_Form(object):
-    
+
     def Buscar(self):
 		result=self.manejador.Buscar(str(self.le_due.text()))
 		if result==None:
@@ -68,8 +68,8 @@ class Ui_Form(object):
     def __btn_click(self):
 	self.manejador=ManejadorEstudiante()
 	#QtCore.QObject.connect(self.btn_buscar_2,QtCore.SIGNAL("clicked()"),self.Buscar2)
-	QtCore.QObject.connect(self.btn_inscribir_2,QtCore.SIGNAL("clicked()"),self.Inscribir2)	
-
+	QtCore.QObject.connect(self.btn_inscribir_2,QtCore.SIGNAL("clicked()"),self.Inscribir2)
+	
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
         Form.resize(660, 480)
@@ -191,6 +191,7 @@ class Ui_Form(object):
         self.cmb_carrera_2 = QtGui.QComboBox(self.groupBox_2)
         self.cmb_carrera_2.setGeometry(QtCore.QRect(114, 161, 281, 31))
         self.cmb_carrera_2.setObjectName(_fromUtf8("cmb_carrera_2"))
+        self.cmb_carrera_2.addItem(_fromUtf8(""))
         self.cmb_carrera_2.addItem(_fromUtf8(""))
         self.cmb_carrera_2.addItem(_fromUtf8(""))
         self.cmb_carrera_2.addItem(_fromUtf8(""))
@@ -376,7 +377,7 @@ class Ui_Form(object):
         self.toolBox.addItem(self.page_5, _fromUtf8(""))
 
         self.retranslateUi(Form)
-        self.toolBox.setCurrentIndex(0)
+        self.toolBox.setCurrentIndex(1)
         QtCore.QObject.connect(self.le_pass, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.btn_cambiar.click)
         QtCore.QObject.connect(self.le_port, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.le_user.setFocus)
         QtCore.QObject.connect(self.btn_clear, QtCore.SIGNAL(_fromUtf8("clicked()")), self.le_due.clear)
@@ -414,8 +415,8 @@ class Ui_Form(object):
         Form.setTabOrder(self.le_port, self.le_user)
         Form.setTabOrder(self.le_user, self.le_pass)
         Form.setTabOrder(self.le_pass, self.btn_cambiar)
-    
-    	self.__miCod()
+
+        self.__miCod()
     	self.__btn_click()
 
     def retranslateUi(self, Form):
@@ -448,6 +449,7 @@ class Ui_Form(object):
         self.cmb_carrera_2.setItemText(4, QtGui.QApplication.translate("Form", "INGENIERIA INDUSTRIAL", None, QtGui.QApplication.UnicodeUTF8))
         self.cmb_carrera_2.setItemText(5, QtGui.QApplication.translate("Form", "INGENIERIA DE SISTEMAS INFORMATICOS", None, QtGui.QApplication.UnicodeUTF8))
         self.cmb_carrera_2.setItemText(6, QtGui.QApplication.translate("Form", "INGENIERIA ELECTRICA", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmb_carrera_2.setItemText(7, QtGui.QApplication.translate("Form", "NO ES ESTUDIANTE", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_5.setTitle(QtGui.QApplication.translate("Form", "Opciones", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_inscribir_2.setText(QtGui.QApplication.translate("Form", "Inscribir", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_clear_2.setText(QtGui.QApplication.translate("Form", "Limpiar", None, QtGui.QApplication.UnicodeUTF8))
