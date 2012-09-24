@@ -17,23 +17,22 @@ except AttributeError:
 class Ui_Form(object):
 	
     def Buscar(self):
-		result=self.manejador.Buscar(str(self.le_due.text()))
+		result=self.manejador.Buscar(str(self.le_due.text()).upper())
 		if result==None:
-			result=self.manejador.Buscar_estudiante(str(self.le_due.text()))
+			result=self.manejador.Buscar_estudiante(str(self.le_due.text()).upper())
 		        if result!=None:
-		 		self.lbl_nombre.setText(result["nombres"]+" "+result["apellidos"])
+		 		self.lbl_nombre.setText(result["nombres"].upper()+" "+result["apellidos"].upper())
        				self.lbl_carrera.setText(result["carrear"])
 			else:
 				QtGui.QMessageBox.information(self.toolBox, 'No Encontrado', "No se han encontrado coincidencias")
     		else:
 			self.lbl_nombre.setText(result["nombre"])
                         self.lbl_carrera.setText(result["carrera"])
-
+			self.Marcar(result)
 
     def Inscribir(self):
 	if str(self.le_due.text())!="":
-		inscrito=self.manejador.Inscribir(str(self.le_due.text()),str(self.lbl_nombre.text()),str(self.lbl_carrera.text()))
-		print inscrito
+		inscrito=self.manejador.Inscribir(str(self.le_due.text()).upper(),str(self.lbl_nombre.text().toUtf8()),str(self.lbl_carrera.text()))
 		if inscrito==1:
 			self.btn_clear.click()
 		elif inscrito==0:
@@ -42,13 +41,45 @@ class Ui_Form(object):
 			 QtGui.QMessageBox.information(self.toolBox, 'Error', "Ha ocurrido un error")
         
     def Asistencia(self):
-	if str(self.le_due.text())!="":
-		print "hola"		
+	if str(self.le_due.text())!="":	
+		print self.lbl_nombre.text().toUtf8()
+		inscrito=self.manejador.Inscribir(str(self.le_due.text()).upper(),str(self.lbl_nombre.text().toUtf8()),str(self.lbl_carrera.text()))
+                if inscrito==2:
+			QtGui.QMessageBox.information(self.toolBox, 'Error', "Ha ocurrido un error")
+		else:			                        
+		#	self.btn_clear.click()
+                        self.manejador.MarcarAsistencia(str(self.le_due.text()).upper())
+                	result=self.manejador.Buscar(str(self.le_due.text()).upper())
+			self.Marcar(result)
+
+                         
+    def Marcar(self,objeto):
+	if objeto.has_key("dias"):
+		if objeto["dias"].has_key("lun"):
+			self.chk_lun.setCheckState(True)
+		if objeto["dias"].has_key("mar"):
+                        self.chk_mar.setCheckState(True)
+		if objeto["dias"].has_key("mie"):
+                        self.chk_mier.setCheckState(True)
+		if objeto["dias"].has_key("jue"):
+                        self.chk_jue.setCheckState(True)
+		if objeto["dias"].has_key("vie"):
+			self.chk_vier.setCheckState(True)
+
+    def Desmarcar(self):
+                        self.chk_lun.setCheckState(False)
+                        self.chk_mar.setCheckState(False)
+                        self.chk_mier.setCheckState(False)
+                        self.chk_jue.setCheckState(False)
+                        self.chk_vier.setCheckState(False)
+
+
     def __miCod(self):
 	self.manejador=ManejadorEstudiante()
 	QtCore.QObject.connect(self.btn_buscar,QtCore.SIGNAL("clicked()"),self.Buscar)
 	QtCore.QObject.connect(self.btn_inscribir,QtCore.SIGNAL("clicked()"),self.Inscribir)	
 	QtCore.QObject.connect(self.btn_asist,QtCore.SIGNAL("clicked()"),self.Asistencia)
+	QtCore.QObject.connect(self.btn_clear, QtCore.SIGNAL(_fromUtf8("clicked()")),self.Desmarcar)
 
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
