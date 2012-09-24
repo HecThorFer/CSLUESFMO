@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'GUI/gui2.ui'
 #
-# Created: Sun Sep 23 21:47:03 2012
+# Created: Sun Sep 23 23:20:03 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -16,27 +16,26 @@ except AttributeError:
     _fromUtf8 = lambda s: s
 
 class Ui_Form(object):
-    
+
     def Buscar(self):
-		result=self.manejador.Buscar(str(self.le_due.text()))
+		result=self.manejador.Buscar(str(self.le_due.text()).upper())
 		if result==None:
-			result=self.manejador.Buscar_estudiante(str(self.le_due.text()))
+			result=self.manejador.Buscar_estudiante(str(self.le_due.text()).upper())
 		        if result!=None:
-		 		self.lbl_nombre.setText(result["nombres"]+" "+result["apellidos"])
+		 		self.lbl_nombre.setText(result["nombres"].upper()+" "+result["apellidos"].upper())
        				self.lbl_carrera.setText(result["carrear"])
 			else:
 				QtGui.QMessageBox.information(self.toolBox, 'No Encontrado', "No se han encontrado coincidencias")
     		else:
 			self.lbl_nombre.setText(result["nombre"])
-                        self.lbl_carrera.setText(result["carrera"])    
+                        self.lbl_carrera.setText(result["carrera"])
+			self.Marcar(result)
 
     def Inscribir(self):
 	if str(self.le_due.text())!="":
-		inscrito=self.manejador.Inscribir(str(self.le_due.text()),str(self.lbl_nombre.text()),str(self.lbl_carrera.text()))
-		print inscrito
+		inscrito=self.manejador.Inscribir(str(self.le_due.text()).upper(),str(self.lbl_nombre.text().toUtf8()),str(self.lbl_carrera.text()))
 		if inscrito==1:
 			self.btn_clear.click()
-			self.btn_clear_2.click()
 		elif inscrito==0:
 			 QtGui.QMessageBox.information(self.toolBox, 'Lo Siento', "Esta persona ya esta inscrita")
 		else:
@@ -44,31 +43,57 @@ class Ui_Form(object):
     
     def Inscribir2(self):    
 	if str(self.le_carnet.text())!="":
-		inscrito=self.manejador.Inscribir(str(self.le_carnet.text()),str(self.le_nombre.text()) + str(" ") + str(self.le_apellido.text()),str(self.cmb_carrera.currentText()))
+		inscrito=self.manejador.Inscribir(str(self.le_carnet.text().upper()),str(self.le_nombre.text().toUtf8()) + str(" ") + str(self.le_apellido.text().toUtf8()),str(self.cmb_carrera_2.currentText()))
 		if inscrito==1:
 			self.btn_clear.click()
 		elif inscrito==0:
 			 QtGui.QMessageBox.information(self.toolBox, 'Lo Siento', "Esta persona ya esta inscrita")
 		else:
 			 QtGui.QMessageBox.information(self.toolBox, 'Error', "Ha ocurrido un error")
-            
+        
     def Asistencia(self):
-	if str(self.le_due.text())!="":
-		print "hola"		
-    
-    def Asistencia2(self):
-	if str(self.le_carnet.text())!="":
-		print "salu"
-    
+	if str(self.le_due.text())!="":	
+		print self.lbl_nombre.text().toUtf8()
+		inscrito=self.manejador.Inscribir(str(self.le_due.text()).upper(),str(self.lbl_nombre.text().toUtf8()),str(self.lbl_carrera.text()))
+                if inscrito==2:
+			QtGui.QMessageBox.information(self.toolBox, 'Error', "Ha ocurrido un error")
+		else:			                        
+		#	self.btn_clear.click()
+                        self.manejador.MarcarAsistencia(str(self.le_due.text()).upper())
+                	result=self.manejador.Buscar(str(self.le_due.text()).upper())
+			self.Marcar(result)
+
+                         
+    def Marcar(self,objeto):
+	if objeto.has_key("dias"):
+		if objeto["dias"].has_key("lun"):
+			self.chk_lun.setCheckState(True)
+		if objeto["dias"].has_key("mar"):
+                        self.chk_mar.setCheckState(True)
+		if objeto["dias"].has_key("mie"):
+                        self.chk_mier.setCheckState(True)
+		if objeto["dias"].has_key("jue"):
+                        self.chk_jue.setCheckState(True)
+		if objeto["dias"].has_key("vie"):
+			self.chk_vier.setCheckState(True)
+
+    def Desmarcar(self):
+                        self.chk_lun.setCheckState(False)
+                        self.chk_mar.setCheckState(False)
+                        self.chk_mier.setCheckState(False)
+                        self.chk_jue.setCheckState(False)
+                        self.chk_vier.setCheckState(False)
+
+
     def __miCod(self):
 	self.manejador=ManejadorEstudiante()
 	QtCore.QObject.connect(self.btn_buscar,QtCore.SIGNAL("clicked()"),self.Buscar)
 	QtCore.QObject.connect(self.btn_inscribir,QtCore.SIGNAL("clicked()"),self.Inscribir)	
 	QtCore.QObject.connect(self.btn_asist,QtCore.SIGNAL("clicked()"),self.Asistencia)
-
-    def __btn_click(self):
+	QtCore.QObject.connect(self.btn_clear, QtCore.SIGNAL(_fromUtf8("clicked()")),self.Desmarcar)
+	
+	def __btn_click(self):
 	self.manejador=ManejadorEstudiante()
-	#QtCore.QObject.connect(self.btn_buscar_2,QtCore.SIGNAL("clicked()"),self.Buscar2)
 	QtCore.QObject.connect(self.btn_inscribir_2,QtCore.SIGNAL("clicked()"),self.Inscribir2)
 	
     def setupUi(self, Form):
@@ -77,10 +102,10 @@ class Ui_Form(object):
         self.toolBox = QtGui.QToolBox(Form)
         self.toolBox.setGeometry(QtCore.QRect(20, 20, 621, 421))
         self.toolBox.setObjectName(_fromUtf8("toolBox"))
-        self.page_3 = QtGui.QWidget()
-        self.page_3.setGeometry(QtCore.QRect(0, 0, 621, 281))
-        self.page_3.setObjectName(_fromUtf8("page_3"))
-        self.groupBox = QtGui.QGroupBox(self.page_3)
+        self.page = QtGui.QWidget()
+        self.page.setGeometry(QtCore.QRect(0, 0, 621, 281))
+        self.page.setObjectName(_fromUtf8("page"))
+        self.groupBox = QtGui.QGroupBox(self.page)
         self.groupBox.setGeometry(QtCore.QRect(40, 20, 531, 221))
         self.groupBox.setTitle(_fromUtf8(""))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
@@ -94,6 +119,7 @@ class Ui_Form(object):
         self.label.setObjectName(_fromUtf8("label"))
         self.horizontalLayout.addWidget(self.label)
         self.le_due = QtGui.QLineEdit(self.layoutWidget_2)
+        self.le_due.setInputMask(_fromUtf8(""))
         self.le_due.setObjectName(_fromUtf8("le_due"))
         self.horizontalLayout.addWidget(self.le_due)
         self.btn_buscar = QtGui.QPushButton(self.layoutWidget_2)
@@ -147,7 +173,7 @@ class Ui_Form(object):
         self.lbl_carrera = QtGui.QLabel(self.widget2)
         self.lbl_carrera.setObjectName(_fromUtf8("lbl_carrera"))
         self.verticalLayout_10.addWidget(self.lbl_carrera)
-        self.widget3 = QtGui.QWidget(self.page_3)
+        self.widget3 = QtGui.QWidget(self.page)
         self.widget3.setGeometry(QtCore.QRect(50, 210, 516, 30))
         self.widget3.setObjectName(_fromUtf8("widget3"))
         self.horizontalLayout_16 = QtGui.QHBoxLayout(self.widget3)
@@ -174,11 +200,11 @@ class Ui_Form(object):
         self.chk_vier.setObjectName(_fromUtf8("chk_vier"))
         self.horizontalLayout_15.addWidget(self.chk_vier)
         self.horizontalLayout_16.addLayout(self.horizontalLayout_15)
-        self.toolBox.addItem(self.page_3, _fromUtf8(""))
-        self.page = QtGui.QWidget()
-        self.page.setGeometry(QtCore.QRect(0, 0, 621, 281))
-        self.page.setObjectName(_fromUtf8("page"))
-        self.groupBox_2 = QtGui.QGroupBox(self.page)
+        self.toolBox.addItem(self.page, _fromUtf8(""))
+        self.page_1 = QtGui.QWidget()
+        self.page_1.setGeometry(QtCore.QRect(0, 0, 621, 281))
+        self.page_1.setObjectName(_fromUtf8("page_1"))
+        self.groupBox_2 = QtGui.QGroupBox(self.page_1)
         self.groupBox_2.setGeometry(QtCore.QRect(30, 40, 571, 261))
         self.groupBox_2.setInputMethodHints(QtCore.Qt.ImhNone)
         self.groupBox_2.setTitle(_fromUtf8(""))
@@ -229,6 +255,7 @@ class Ui_Form(object):
         self.label_6.setObjectName(_fromUtf8("label_6"))
         self.horizontalLayout_4.addWidget(self.label_6)
         self.le_carnet = QtGui.QLineEdit(self.widget5)
+        self.le_carnet.setInputMask(_fromUtf8(""))
         self.le_carnet.setObjectName(_fromUtf8("le_carnet"))
         self.horizontalLayout_4.addWidget(self.le_carnet)
         self.verticalLayout_2.addLayout(self.horizontalLayout_4)
@@ -255,15 +282,15 @@ class Ui_Form(object):
         self.horizontalLayout_11.addWidget(self.le_apellido)
         self.verticalLayout.addLayout(self.horizontalLayout_11)
         self.verticalLayout_2.addLayout(self.verticalLayout)
-        self.toolBox.addItem(self.page, _fromUtf8(""))
+        self.toolBox.addItem(self.page_1, _fromUtf8(""))
         self.page_2 = QtGui.QWidget()
         self.page_2.setGeometry(QtCore.QRect(0, 0, 621, 281))
         self.page_2.setObjectName(_fromUtf8("page_2"))
         self.widget6 = QtGui.QWidget(self.page_2)
-        self.widget6.setGeometry(QtCore.QRect(40, 20, 551, 211))
+        self.widget6.setGeometry(QtCore.QRect(30, 60, 551, 211))
         self.widget6.setObjectName(_fromUtf8("widget6"))
         self.widget7 = QtGui.QWidget(self.widget6)
-        self.widget7.setGeometry(QtCore.QRect(60, 10, 361, 99))
+        self.widget7.setGeometry(QtCore.QRect(90, 60, 361, 99))
         self.widget7.setObjectName(_fromUtf8("widget7"))
         self.verticalLayout_7 = QtGui.QVBoxLayout(self.widget7)
         self.verticalLayout_7.setMargin(0)
@@ -291,7 +318,7 @@ class Ui_Form(object):
         self.horizontalLayout_9.addWidget(self.btn_clear_4)
         self.verticalLayout_7.addLayout(self.horizontalLayout_9)
         self.widget8 = QtGui.QWidget(self.widget6)
-        self.widget8.setGeometry(QtCore.QRect(60, 110, 395, 52))
+        self.widget8.setGeometry(QtCore.QRect(90, 160, 395, 52))
         self.widget8.setObjectName(_fromUtf8("widget8"))
         self.horizontalLayout_2 = QtGui.QHBoxLayout(self.widget8)
         self.horizontalLayout_2.setMargin(0)
@@ -315,79 +342,39 @@ class Ui_Form(object):
         self.verticalLayout_6.addWidget(self.lbl_codigo)
         self.horizontalLayout_2.addLayout(self.verticalLayout_6)
         self.toolBox.addItem(self.page_2, _fromUtf8(""))
-        self.page_5 = QtGui.QWidget()
-        self.page_5.setGeometry(QtCore.QRect(0, 0, 621, 281))
-        self.page_5.setObjectName(_fromUtf8("page_5"))
-        self.groupBox_3 = QtGui.QGroupBox(self.page_5)
-        self.groupBox_3.setGeometry(QtCore.QRect(50, 10, 521, 211))
-        self.groupBox_3.setInputMethodHints(QtCore.Qt.ImhNone)
-        self.groupBox_3.setTitle(_fromUtf8(""))
-        self.groupBox_3.setObjectName(_fromUtf8("groupBox_3"))
-        self.groupBox_8 = QtGui.QGroupBox(self.groupBox_3)
-        self.groupBox_8.setGeometry(QtCore.QRect(330, 30, 181, 101))
+        self.page_3 = QtGui.QWidget()
+        self.page_3.setGeometry(QtCore.QRect(0, 0, 621, 281))
+        self.page_3.setObjectName(_fromUtf8("page_3"))
+        self.groupBox_8 = QtGui.QGroupBox(self.page_3)
+        self.groupBox_8.setGeometry(QtCore.QRect(130, 60, 371, 161))
         self.groupBox_8.setObjectName(_fromUtf8("groupBox_8"))
-        self.btn_cambiar = QtGui.QPushButton(self.groupBox_8)
-        self.btn_cambiar.setGeometry(QtCore.QRect(10, 40, 151, 31))
-        self.btn_cambiar.setObjectName(_fromUtf8("btn_cambiar"))
-        self.widget9 = QtGui.QWidget(self.groupBox_3)
-        self.widget9.setGeometry(QtCore.QRect(20, 10, 255, 152))
-        self.widget9.setObjectName(_fromUtf8("widget9"))
-        self.verticalLayout_8 = QtGui.QVBoxLayout(self.widget9)
-        self.verticalLayout_8.setMargin(0)
-        self.verticalLayout_8.setObjectName(_fromUtf8("verticalLayout_8"))
-        self.horizontalLayout_6 = QtGui.QHBoxLayout()
-        self.horizontalLayout_6.setObjectName(_fromUtf8("horizontalLayout_6"))
-        self.label_4 = QtGui.QLabel(self.widget9)
+        self.layoutWidget_3 = QtGui.QWidget(self.groupBox_8)
+        self.layoutWidget_3.setGeometry(QtCore.QRect(40, 60, 241, 62))
+        self.layoutWidget_3.setObjectName(_fromUtf8("layoutWidget_3"))
+        self.horizontalLayout_3 = QtGui.QHBoxLayout(self.layoutWidget_3)
+        self.horizontalLayout_3.setMargin(0)
+        self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
+        self.verticalLayout_3 = QtGui.QVBoxLayout()
+        self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
+        self.label_4 = QtGui.QLabel(self.layoutWidget_3)
         self.label_4.setObjectName(_fromUtf8("label_4"))
-        self.horizontalLayout_6.addWidget(self.label_4)
-        self.le_ip = QtGui.QLineEdit(self.widget9)
-        self.le_ip.setObjectName(_fromUtf8("le_ip"))
-        self.horizontalLayout_6.addWidget(self.le_ip)
-        self.verticalLayout_8.addLayout(self.horizontalLayout_6)
-        self.horizontalLayout_12 = QtGui.QHBoxLayout()
-        self.horizontalLayout_12.setObjectName(_fromUtf8("horizontalLayout_12"))
-        self.label_5 = QtGui.QLabel(self.widget9)
-        self.label_5.setObjectName(_fromUtf8("label_5"))
-        self.horizontalLayout_12.addWidget(self.label_5)
-        self.le_port = QtGui.QLineEdit(self.widget9)
-        self.le_port.setInputMethodHints(QtCore.Qt.ImhFormattedNumbersOnly)
-        self.le_port.setObjectName(_fromUtf8("le_port"))
-        self.horizontalLayout_12.addWidget(self.le_port)
-        self.verticalLayout_8.addLayout(self.horizontalLayout_12)
-        self.horizontalLayout_13 = QtGui.QHBoxLayout()
-        self.horizontalLayout_13.setObjectName(_fromUtf8("horizontalLayout_13"))
-        self.label_15 = QtGui.QLabel(self.widget9)
-        self.label_15.setObjectName(_fromUtf8("label_15"))
-        self.horizontalLayout_13.addWidget(self.label_15)
-        self.le_user = QtGui.QLineEdit(self.widget9)
-        self.le_user.setText(_fromUtf8(""))
-        self.le_user.setObjectName(_fromUtf8("le_user"))
-        self.horizontalLayout_13.addWidget(self.le_user)
-        self.verticalLayout_8.addLayout(self.horizontalLayout_13)
-        self.horizontalLayout_14 = QtGui.QHBoxLayout()
-        self.horizontalLayout_14.setObjectName(_fromUtf8("horizontalLayout_14"))
-        self.label_22 = QtGui.QLabel(self.widget9)
-        self.label_22.setObjectName(_fromUtf8("label_22"))
-        self.horizontalLayout_14.addWidget(self.label_22)
-        self.le_pass = QtGui.QLineEdit(self.widget9)
-        self.le_pass.setInputMethodHints(QtCore.Qt.ImhNone)
-        self.le_pass.setText(_fromUtf8(""))
-        self.le_pass.setObjectName(_fromUtf8("le_pass"))
-        self.horizontalLayout_14.addWidget(self.le_pass)
-        self.verticalLayout_8.addLayout(self.horizontalLayout_14)
-        self.toolBox.addItem(self.page_5, _fromUtf8(""))
+        self.verticalLayout_3.addWidget(self.label_4)
+        self.lineEdit = QtGui.QLineEdit(self.layoutWidget_3)
+        self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
+        self.verticalLayout_3.addWidget(self.lineEdit)
+        self.horizontalLayout_3.addLayout(self.verticalLayout_3)
+        self.btn_cambiar = QtGui.QPushButton(self.layoutWidget_3)
+        self.btn_cambiar.setObjectName(_fromUtf8("btn_cambiar"))
+        self.horizontalLayout_3.addWidget(self.btn_cambiar)
+        self.toolBox.addItem(self.page_3, _fromUtf8(""))
 
         self.retranslateUi(Form)
-        self.toolBox.setCurrentIndex(1)
+        self.toolBox.setCurrentIndex(0)
         self.cmb_carrera_2.setCurrentIndex(0)
-        QtCore.QObject.connect(self.le_pass, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.btn_cambiar.click)
-        QtCore.QObject.connect(self.le_port, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.le_user.setFocus)
         QtCore.QObject.connect(self.btn_clear, QtCore.SIGNAL(_fromUtf8("clicked()")), self.le_due.clear)
         QtCore.QObject.connect(self.le_due, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.btn_buscar.click)
         QtCore.QObject.connect(self.le_carnet, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.le_nombre.setFocus)
-        QtCore.QObject.connect(self.le_user, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.le_pass.setFocus)
         QtCore.QObject.connect(self.le_nombre, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.le_apellido.setFocus)
-        QtCore.QObject.connect(self.le_ip, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.le_port.setFocus)
         QtCore.QObject.connect(self.btn_clear_2, QtCore.SIGNAL(_fromUtf8("clicked()")), self.le_apellido.clear)
         QtCore.QObject.connect(self.btn_clear_2, QtCore.SIGNAL(_fromUtf8("clicked()")), self.le_nombre.clear)
         QtCore.QObject.connect(self.btn_clear_2, QtCore.SIGNAL(_fromUtf8("clicked()")), self.le_carnet.clear)
@@ -410,19 +397,13 @@ class Ui_Form(object):
         Form.setTabOrder(self.le_nombre, self.le_apellido)
         Form.setTabOrder(self.le_apellido, self.btn_inscribir_2)
         Form.setTabOrder(self.btn_inscribir_2, self.btn_rifa)
-        Form.setTabOrder(self.btn_rifa, self.le_ip)
-        Form.setTabOrder(self.le_ip, self.le_port)
-        Form.setTabOrder(self.le_port, self.le_user)
-        Form.setTabOrder(self.le_user, self.le_pass)
-        Form.setTabOrder(self.le_pass, self.btn_cambiar)
-
+        
         self.__miCod()
-    	self.__btn_click()
-    	
+        self.__btn_click()
+        
     def retranslateUi(self, Form):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "Ingenieria Y Arquitectura", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Form", "DUE:", None, QtGui.QApplication.UnicodeUTF8))
-        self.le_due.setInputMask(QtGui.QApplication.translate("Form", "AA99999; ", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_buscar.setText(QtGui.QApplication.translate("Form", "Buscar", None, QtGui.QApplication.UnicodeUTF8))
         self.label_19.setText(QtGui.QApplication.translate("Form", "DUE del estudiante a buscar", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_4.setTitle(QtGui.QApplication.translate("Form", "Opciones", None, QtGui.QApplication.UnicodeUTF8))
@@ -439,7 +420,7 @@ class Ui_Form(object):
         self.chk_mier.setText(QtGui.QApplication.translate("Form", "Miércoles", None, QtGui.QApplication.UnicodeUTF8))
         self.chk_jue.setText(QtGui.QApplication.translate("Form", "Jueves", None, QtGui.QApplication.UnicodeUTF8))
         self.chk_vier.setText(QtGui.QApplication.translate("Form", "Viernes", None, QtGui.QApplication.UnicodeUTF8))
-        self.toolBox.setItemText(self.toolBox.indexOf(self.page_3), QtGui.QApplication.translate("Form", "Inscribir Estudiantes", None, QtGui.QApplication.UnicodeUTF8))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page), QtGui.QApplication.translate("Form", "Inscribir Estudiantes", None, QtGui.QApplication.UnicodeUTF8))
         self.label_21.setText(QtGui.QApplication.translate("Form", "Información del Estudiante:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_14.setText(QtGui.QApplication.translate("Form", "       Carrera:", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_5.setTitle(QtGui.QApplication.translate("Form", "Opciones", None, QtGui.QApplication.UnicodeUTF8))
@@ -454,10 +435,9 @@ class Ui_Form(object):
         self.cmb_carrera_2.setItemText(6, QtGui.QApplication.translate("Form", "INGENIERIA ELECTRICA", None, QtGui.QApplication.UnicodeUTF8))
         self.cmb_carrera_2.setItemText(7, QtGui.QApplication.translate("Form", "NO ES ESTUDIANTE", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("Form", "          Carnet:", None, QtGui.QApplication.UnicodeUTF8))
-        self.le_carnet.setInputMask(QtGui.QApplication.translate("Form", "AA99999; ", None, QtGui.QApplication.UnicodeUTF8))
         self.label_11.setText(QtGui.QApplication.translate("Form", "        Nombre:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_12.setText(QtGui.QApplication.translate("Form", "     Apellidos:", None, QtGui.QApplication.UnicodeUTF8))
-        self.toolBox.setItemText(self.toolBox.indexOf(self.page), QtGui.QApplication.translate("Form", "Inscribir Estudiantes Otros", None, QtGui.QApplication.UnicodeUTF8))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_1), QtGui.QApplication.translate("Form", "Inscribir Estudiantes Otros", None, QtGui.QApplication.UnicodeUTF8))
         self.label_10.setText(QtGui.QApplication.translate("Form", "Carrera según día:", None, QtGui.QApplication.UnicodeUTF8))
         self.cmb_carrera.setItemText(0, QtGui.QApplication.translate("Form", "INGENIERIA QUIMICA", None, QtGui.QApplication.UnicodeUTF8))
         self.cmb_carrera.setItemText(1, QtGui.QApplication.translate("Form", "INGENIERIA MECANICA", None, QtGui.QApplication.UnicodeUTF8))
@@ -473,17 +453,10 @@ class Ui_Form(object):
         self.label_8.setText(QtGui.QApplication.translate("Form", "DUE", None, QtGui.QApplication.UnicodeUTF8))
         self.lbl_codigo.setText(QtGui.QApplication.translate("Form", "@DUE        ", None, QtGui.QApplication.UnicodeUTF8))
         self.toolBox.setItemText(self.toolBox.indexOf(self.page_2), QtGui.QApplication.translate("Form", "Rifa", None, QtGui.QApplication.UnicodeUTF8))
-        self.groupBox_8.setTitle(QtGui.QApplication.translate("Form", "Opciones", None, QtGui.QApplication.UnicodeUTF8))
-        self.btn_cambiar.setText(QtGui.QApplication.translate("Form", "Cambiar Configuración", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_4.setText(QtGui.QApplication.translate("Form", "Direccion IPv4:", None, QtGui.QApplication.UnicodeUTF8))
-        self.le_ip.setInputMask(QtGui.QApplication.translate("Form", "999.999.999.999; ", None, QtGui.QApplication.UnicodeUTF8))
-        self.le_ip.setText(QtGui.QApplication.translate("Form", "127.0.0.0", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_5.setText(QtGui.QApplication.translate("Form", "            Puerto:", None, QtGui.QApplication.UnicodeUTF8))
-        self.le_port.setInputMask(QtGui.QApplication.translate("Form", "99999; ", None, QtGui.QApplication.UnicodeUTF8))
-        self.le_port.setText(QtGui.QApplication.translate("Form", "27017", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_15.setText(QtGui.QApplication.translate("Form", "           Usuario:", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_22.setText(QtGui.QApplication.translate("Form", "    Contraseña:", None, QtGui.QApplication.UnicodeUTF8))
-        self.toolBox.setItemText(self.toolBox.indexOf(self.page_5), QtGui.QApplication.translate("Form", "Configuración", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox_8.setTitle(QtGui.QApplication.translate("Form", "Generar:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("Form", "Nombre Archivo", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_cambiar.setText(QtGui.QApplication.translate("Form", "Generar", None, QtGui.QApplication.UnicodeUTF8))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_3), QtGui.QApplication.translate("Form", "Exportar", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":
