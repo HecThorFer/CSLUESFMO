@@ -106,7 +106,7 @@ class Ui_Form(object):
 	QtCore.QObject.connect(self.btn_inscribir,QtCore.SIGNAL("clicked()"),self.Inscribir)	
 	QtCore.QObject.connect(self.btn_asist,QtCore.SIGNAL("clicked()"),self.Asistencia)
 	QtCore.QObject.connect(self.btn_clear, QtCore.SIGNAL(_fromUtf8("clicked()")),self.Desmarcar)
-		
+	QtCore.QObject.connect(self.btn_cambiar, QtCore.SIGNAL(_fromUtf8("clicked()")),self.Exportar)		
     def __btn_click(self):
 	        self.manejador=ManejadorEstudiante()
 	        QtCore.QObject.connect(self.btn_inscribir_2,QtCore.SIGNAL("clicked()"),self.Inscribir2)
@@ -118,6 +118,9 @@ class Ui_Form(object):
     def __btn_rifa_click(self):
 	    self.manejador=ManejadorEstudiante()
 	    QtCore.QObject.connect(self.btn_rifa,QtCore.SIGNAL("clicked()"),self.Rifa)
+	
+    def Exportar(self):
+	self.manejador.Exportar(str(self.lineEdit.text()))
 	
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
